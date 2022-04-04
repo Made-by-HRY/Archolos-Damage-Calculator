@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TCoM: Archolos - Simple Damage Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="nav nav-fill">
+            <a class="nav-item nav-link" href="https://kronikimyrtany.pl/"><span id="download-mod-text">Download mod</span></a>
+        </nav>
+        <section id="title">
+            <a href="https://kronikimyrtany.pl/">
+                <img src="assets/logo.webp" alt="Archolos Logo">
+            </a>
+            <h1 id="title-text">Simple Damage Calculator</h1>
+            <span id="preface-1-text">Based on the</span>
+            <br>
+            <a href="https://docs.google.com/spreadsheets/d/1p5y4OGCkbqiaOowdcz2Q5KInaVsVLQbGJYG3gYxHL18">
+                <span id="preface-spreadsheet-text">Google Spreadsheet</span>
+            </a>
+            <br>
+            <span id="preface-2-text">made by CrazyRaus#5084</span>
+            <div class="no-select">
+                <select name="language" id="language">
+                    <option value="en">EN 🇬🇧</option>
+                    <option value="pl">PL 🇵🇱</option>
+                </select>
+            </div>
+        </section>
+    </header>
+    <main>
+        <div id="damage-types" class="no-select">
+            <section id="melee">
+                <h2>🔪 <span id="melee-text">Melee</span> ⚔️</h2>
+                <div id="melee-result"></div>
+                <form onsubmit="return null;">
+                    <label for="melee-weapon" id="melee-weapon-text">Weapon damage: </label>
+                    <div class="special-height">
+                        <input type="number" id="melee-weapon" name="melee-weapon" data-min="5" value="0" min="0" max="999"><br>
+                        <input type="range" id="melee-weapon-range" name="melee-weapon-range" data-min="5" value="0" min="0" max="999">
+                    </div>
+                    <label for="melee-attribute" id="melee-attribute-text">Strength: </label>
+                    <div class="special-height">
+                        <input type="number" id="melee-attribute" name="melee-attribute" data-min="10" value="0" min="0"><br>
+                        <input type="range" id="melee-attribute-range" name="melee-attribute-range" data-min="0" value="0" min="0" max="999">
+                    </div>
+                    <label for="melee-armor" id="melee-armor-text">Enemy armor: </label>
+                    <div class="special-height">
+                        <input type="number" id="melee-armor" name="melee-armor" value="0" min="0"><br>
+                        <input type="range" id="melee-armor-range" name="melee-armor-range" data-min="0" value="0" min="0" max="999">
+                    </div>
+                    <label for="melee-penetration" id="melee-penetration-text">Armor penetration: </label>
+                    <div class="special-height">
+                        <input type="number" id="melee-penetration" name="melee-penetration" value="0" min="0"><br>
+                        <input type="range" id="melee-penetration-range" name="melee-penetration-range" data-min="0" value="0" min="0" max="999">
+                    </div>
+                </form>
+            </section>
+            <section id="staff">
+                <h2>🗡️ <span id="staff-text">Staff</span> ✨</h2>
+                <div id="staff-result"></div>
+                <form onsubmit="return null;">
+                    <label for="staff-weapon" id="staff-weapon-text">Weapon damage: </label>
+                    <div class="special-height">
+                        <input type="number" id="staff-weapon" name="staff-weapon" data-min="5" value="0" min="0"><br>
+                        <input type="range" id="staff-weapon-range" name="staff-weapon-rang" data-min="0" value="0" min="0" max="999">
+                    </div>
+                    <label for="staff-attribute" id="staff-attribute-text">N/A: </label>
+                    <div class="special-height">
+                        <input type="number" id="staff-attribute" name="staff-attribute" value="0" min="0" disabled><br>
+                        <input type="range" id="staff-attribute-range" name="staff-attribute-range" data-min="0" value="0" min="0" max="999" disabled>
+                    </div>
+                    <label for="staff-armor" id="staff-armor-text">Enemy armor: </label>
+                    <div class="special-height">
+                        <input type="number" id="staff-armor" name="staff-armor" value="0" min="0"><br>
+                        <input type="range" id="staff-armor-range" name="staff-armor-range" data-min="0" value="0" min="0" max="999">
+                    </div>
+                    <label for="staff-penetration" id="staff-penetration-text">Armor penetration: </label>
+                    <div class="special-height">
+                        <input type="number" id="staff-penetration" name="staff-penetration" value="0" min="0"><br>
+                        <input type="range" id="staff-penetration-range" name="staff-penetration-range" data-min="0" value="0" min="0" max="999">
+                    </div>
+                </form>
+            </section>
+            <section id="ranged">
+                <h2>🏹 <span id="ranged-text">Ranged</span> 🏹</h2>
+                <div id="ranged-result"></div>
+                <form onsubmit="return null;">
+                    <label for="ranged-weapon" id="ranged-weapon-text">Weapon damage: </label>
+                    <div class="special-height">
+                        <input type="number" id="ranged-weapon" name="ranged-weapon" data-min="10" value="0" min="0"><br>
+                        <input type="range" id="ranged-weapon-range" name="ranged-weapon-range" data-min="0" value="0" min="0" max="999">
+                    </div>
+                    <label for="ranged-attribute" id="ranged-attribute-text">Dexterity: </label>
+                    <div class="special-height">
+                        <input type="number" id="ranged-attribute" name="ranged-attribute" data-min="10" value="0" min="0"><br>
+                        <input type="range" id="ranged-attribute-range" name="ranged-attribute-range" data-min="0" value="0" min="0" max="999">
+                    </div>
+                    <label for="ranged-armor" id="ranged-armor-text">Enemy armor: </label>
+                    <div class="special-height">
+                        <input type="number" id="ranged-armor" name="ranged-armor" value="0" min="0"><br>
+                        <input type="range" id="ranged-armor-range" name="ranged-armor-range" data-min="0" value="0" min="0" max="999">
+                    </div>
+                    <label for="ranged-penetration" id="ranged-penetration-text">Armor penetration: </label>
+                    <div class="special-height">
+                        <input type="number" id="ranged-penetration" name="ranged-penetration" value="0" min="0"><br>
+                        <input type="range" id="ranged-penetration-range" name="ranged-penetration-range" data-min="0" value="0" min="0" max="999">
+                    </div>
+                </form>
+            </section>
+        </div>
+
+    </main>
+    <footer>
+        <div>
+            <a href="https://discord.com/invite/kronikimyrtany">
+                <span id="join-discord-text">Join TCoM Discord Server</span>
+            </a>
+        </div>
+        v1 &copy; HRY#5273
+        <div id="copyright-logo">
+            <span id="copyright-logo-text">This site got permission to use the TCoM: Archolos logo</span>
+            &copy; The Chronicles Of Myrtana Team
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="assets/script.js"></script>
+</body>
+</html>
