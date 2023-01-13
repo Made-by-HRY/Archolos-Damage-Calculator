@@ -1,6 +1,6 @@
 let gLangJson = {};
 
-window.addEventListener('DOMContentLoaded', async (event) => {
+window.addEventListener('DOMContentLoaded', async () => {
     initElements("melee");
     initElements("staff");
     initElements("ranged");
@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
 
     allLangs.splice(allLangs.indexOf(currentLang), 1);
 
-    allLangs.forEach(async (lang) => {
+    for (let lang of allLangs) {
         await fetch(`langs/${lang}.json`)
         .then(response => {
             return response.json();
@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         .then(json => {
             gLangJson[lang] = { ...json };
         });
-    });
+    }
 
 });
 
@@ -56,7 +56,7 @@ const initElements = (idPrefix) => {
         if (element === null)
             return;
 
-        inputRange = document.getElementById(`${element.id}-range`);
+        let inputRange = document.getElementById(`${element.id}-range`);
 
         inputRange.addEventListener("input", calcDamage, true);
         element.addEventListener("input", calcDamage, true);
@@ -136,7 +136,7 @@ const changeLanguage = (event) => {
     let lang = event.target.value;
     let currentJson = gLangJson[lang];
 
-    for (key in currentJson) {
+    for (let key in currentJson) {
         if (key === "page-title")
             continue;
 
@@ -149,9 +149,6 @@ const changeLanguage = (event) => {
         }
     }
 
-    let protocol = window.location.protocol;
-    let hostname = window.location.hostname;
-    let path = window.location.pathname;
     window.history.replaceState(
         {additionalInformation: `changeLanguage -> ${lang}`},
         currentJson["page-title"],
